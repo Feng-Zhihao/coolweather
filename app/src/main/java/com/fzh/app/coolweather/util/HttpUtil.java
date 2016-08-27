@@ -18,7 +18,7 @@ public class HttpUtil {
                 try {
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("Get");
+//                    connection.setRequestMethod("Get");
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
                     InputStream in = connection.getInputStream();
@@ -29,7 +29,7 @@ public class HttpUtil {
                         builder.append(response);
                     }
                     if (listener != null){
-                        listener.onFinish(response.toString());
+                        listener.onFinish(builder.toString());
                     }
                 } catch (Exception e) {
                     if (listener != null){

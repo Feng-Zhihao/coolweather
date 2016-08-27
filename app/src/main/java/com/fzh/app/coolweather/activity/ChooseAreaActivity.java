@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -127,6 +128,7 @@ public class ChooseAreaActivity extends Activity {
 
     private void queryFromServer(final String code, final String type) {
         String address;
+        Log.d("fuckweather","---------ffffff----------->");
         if (!TextUtils.isEmpty(code)){
             address = "http://www.weather.com.cn/data/list3/city"+code+".xml";
         } else {

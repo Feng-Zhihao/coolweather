@@ -1,6 +1,7 @@
 package com.fzh.app.coolweather.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.fzh.app.coolweather.db.CoolWeatherDB;
 import com.fzh.app.coolweather.model.City;
@@ -15,7 +16,7 @@ public class Utility {
      * 解析和处理服务器返回的省级数据
      */
     public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB,String response){
-        if (TextUtils.isEmpty(response)){
+        if (!TextUtils.isEmpty(response)){
             String[] allProvinces = response.split(",");
             if (allProvinces != null && allProvinces.length > 0){
                 for (String p : allProvinces){
@@ -34,6 +35,7 @@ public class Utility {
      * 解析和处理服务器返回的市级数据
      */
     public static boolean handleCitiesResponse(CoolWeatherDB coolWeatherDB,String response,int provinceId){
+        Log.d("fuckweather","---------3333----------->"+response);
         if (!TextUtils.isEmpty(response)){
             String[] allCities = response.split(",");
             if (allCities != null && allCities.length > 0){
@@ -42,6 +44,7 @@ public class Utility {
                     City city= new City();
                     city.setCityCode(array[0]);
                     city.setCityName(array[1]);
+                    city.setProvinceId(provinceId);
                     coolWeatherDB.saveCity(city);
                 }
                 return true;
@@ -61,6 +64,7 @@ public class Utility {
                     County county = new County();
                     county.setCountyCode(array[0]);
                     county.setCountyName(array[1]);
+                    county.setCityId(cityId);
                     coolWeatherDB.saveCounty(county);
                 }
                 return true;
